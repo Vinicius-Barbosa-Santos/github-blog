@@ -8,24 +8,35 @@ import { api } from "../../lib/axios";
 const username = import.meta.env.VITE_GITHUB_USERNAME
 const repoName = import.meta.env.VITE_GITHUB_REPONAME
 
-interface IPost {
-  title: string
+export interface IPost {
+  title: string,
+  body: string,
+  created_at: string,
+  number: number,
+  html_url: string,
+  comments: number,
+  user: {
+    login: string
+  }
 }
 
 export const Blog = () => {
 
   const [posts, setPosts] = useState<IPost[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const getPosts = useCallback(async (query: string = "") => {
     try {
+      setIsLoading(true)
       const response = await api.get(`/search/issues?q=${query}%20repo:${username}/${repoName}`)
 
       setPosts(response.data.items)
 
       // eslint-disable-next-line no-empty
     } finally {
+      setIsLoading(false)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [posts]
   )
 
@@ -38,15 +49,9 @@ export const Blog = () => {
       <Profile />
       <SearchInput />
       <PostsListContainer>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        {posts.map((post) => (
+          <Post key={post.number} post={post} />
+        ))}
       </PostsListContainer>
     </>
   );
