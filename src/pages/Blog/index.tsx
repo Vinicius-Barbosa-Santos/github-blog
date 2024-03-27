@@ -4,6 +4,7 @@ import { Profile } from "./components/Profile";
 import { SearchInput } from "./components/SearchInput";
 import { PostsListContainer } from "./styles";
 import { api } from "../../lib/axios";
+import { Spinner } from "../../components/Spinner";
 
 const username = import.meta.env.VITE_GITHUB_USERNAME
 const repoName = import.meta.env.VITE_GITHUB_REPONAME
@@ -42,17 +43,20 @@ export const Blog = () => {
 
   useEffect(() => {
     getPosts()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
       <Profile />
       <SearchInput postsLength={posts.length} getPosts={getPosts} />
-      <PostsListContainer>
-        {posts.map((post) => (
-          <Post key={post.number} post={post} />
-        ))}
-      </PostsListContainer>
+      {isLoading ? <Spinner /> : (
+        <PostsListContainer>
+          {posts.map((post) => (
+            <Post key={post.number} post={post} />
+          ))}
+        </PostsListContainer>
+      )}
     </>
   );
 }
