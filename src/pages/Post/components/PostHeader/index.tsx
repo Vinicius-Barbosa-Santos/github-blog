@@ -2,13 +2,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ExternalLink } from "../../../../components/ExternalLInk"
 import { PostHeaderContainer } from "./styles"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
-import { faCalendar, faComment } from "@fortawesome/free-solid-svg-icons"
+import { faCalendar, faChevronLeft, faComment } from "@fortawesome/free-solid-svg-icons"
+import { useNavigate } from "react-router-dom"
 
 export const PostHeader = () => {
+
+    const navigate = useNavigate()
+
+    const goBack = () => {
+        navigate(-1)
+    }
+
     return (
         <PostHeaderContainer>
             <header>
-                <ExternalLink text="voltar" href="#" />
+                <ExternalLink
+                    as="button"
+                    onClick={goBack}
+                    icon={<FontAwesomeIcon icon={faChevronLeft} />}
+                    text="Voltar"
+                    variant="iconLeft"
+                />
                 <ExternalLink text="ver  no Github" href="#" target="_blank" />
             </header>
 
