@@ -47,7 +47,7 @@ export const Blog = () => {
   return (
     <>
       <Profile />
-      <SearchInput />
+      <SearchInput getPosts={getPosts} />
       <PostsListContainer>
         {posts.map((post) => (
           <Post key={post.number} post={post} />
