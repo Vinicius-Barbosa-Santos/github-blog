@@ -41,7 +41,6 @@ export const PostHeader = ({ postData, isLoading }: PostHeaderProps) => {
                             target="_blank"
                         />
                     </header>
-
                     <h1>{postData.title}</h1>
 
                     <ul>
