@@ -10,6 +10,12 @@ export const ProfileContainer = styled.section`
   padding: 2rem 2.5rem;
   display: flex;
   gap: 2rem;
+
+  @media (max-width: 500px) {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 export const ProfilePicture = styled.img`
@@ -35,6 +41,10 @@ export const ProfileDetails = styled.div`
       color: ${({ theme }) => theme.colors["base-title"]};
       line-height: 130%;
     }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   ul {
@@ -54,6 +64,10 @@ export const ProfileDetails = styled.div`
         height: 1.125rem;
         color: ${({ theme }) => theme.colors["base-label"]};
       }
+    }
+
+    @media(max-width: 768px) {
+      margin-top: 20px;
     }
   }
 `;
